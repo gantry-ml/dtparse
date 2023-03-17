@@ -8,7 +8,7 @@ from gantry.llm import EvaluationRun
 
 
 def test_model():
-    model = make_model(GOOD_PROMPT)
+    model = make_model(BAD_PROMPT)
     dataset = gdataset.sync_dataset_data(
         "eval_set.json",
     )
