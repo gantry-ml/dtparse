@@ -1,14 +1,18 @@
 [
   {
-    "request": "noon Sunday",
-    "date": "2023-02-23",
-    "time": "11:48:05",
+    "inputs": {
+      "request": "noon Sunday",
+      "date": "2023-02-23",
+      "time": "11:48:05"
+    },
     "label": "2023-02-26 12:00:00"
   },
   {
-    "request": "noon last Sunday",
-    "date": "2023-02-23",
-    "time": "12:47:57",
+    "inputs": {
+      "request": "noon last Sunday",
+      "date": "2023-02-23",
+      "time": "12:47:57"
+    },
     "label": "2023-02-19 12:00:00"
   }
 ]
