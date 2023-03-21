@@ -4,7 +4,7 @@ from .prompts import GOOD_PROMPT, BAD_PROMPT
 import gantry.dataset as gdataset
 from gantry.llm import EvaluationRun
 
-# TODO: Change this to GOOD_PROMPT to see the test pass.
+# TODO: Change this to GOOD_PROMPT to make the test pass.
 PROMPT = BAD_PROMPT
 
 tag = "bug" if PROMPT == BAD_PROMPT else "fix"
@@ -25,7 +25,7 @@ def test_model():
     """
     model = make_model(PROMPT)
     dataset = gdataset.sync_dataset_data(
-        "eval_set.json",
+        "evaluation_dataset.json",
     )
     run = EvaluationRun(dataset)
     with run.start(tag=tag):
