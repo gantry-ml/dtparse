@@ -1,9 +1,9 @@
 from datetime import datetime, date
 from llms import make_model
 from callbacks import GantryCallback
-from prompts import PROMPT
+from prompts import GOOD_PROMPT
 
-model = make_model(PROMPT, callbacks=[GantryCallback("dtparse", env="dev")])
+model = make_model(GOOD_PROMPT, callbacks=[GantryCallback("dtparse", env="dev")])
 
 dtparse = lambda req: model(date=str(date.today()), time=datetime.now().strftime("%H:%M:%S"), request=req)
 
