@@ -9,8 +9,12 @@ PROMPT = BAD_PROMPT
 
 tag = "bug" if PROMPT == BAD_PROMPT else "fix"
 
+# Initialize the dataset of test inputs 
+# from a json file. The test will iterate
+# over the dataset and run the model on each input.
 gdataset._init()
 dataset = gdataset.sync_dataset_data("evaluation_dataset.json")
+# Specify the metrics we want to track
 eval_metrics = ["exact_match"]
 
 model = make_model(PROMPT)
@@ -20,15 +24,10 @@ model = make_model(PROMPT)
 def test_model(input, label, join_key, run):
     """
     A simple test to make sure the model is working as expected. The 
-    test works as follows:
-
-    1. Initialize the model with a prompt template.
-    2. Load a dataset of test inputs from a json file. 
-    3. Initialize a run with the dataset.
-    4. Start the run. When we start the run, all OpenAI SDK calls
-    will be tracked, and inputs & outputs will be logged locally.
-    5. Iterate over the inputs and run the model on each input.
-    6. Assert model predictions are as expected.
+    test will iterate over a dataset of inputs and labels, and assert
+    that the model output is as expected. In addition, all OpenAI SDK
+    calls that happen in application code will be tracked, and the test
+    run information will be logged locally. 
     """
     model_output = model(**input)
 
