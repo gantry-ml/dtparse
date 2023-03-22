@@ -38,7 +38,7 @@ training_data = [
     }
 ]
 
-PROMPT = """
+BAD_PROMPT = """
 You are a calendar. Users will submit you a request in natural language. You will return a date and time in the format "YYYY-MM-DD HH:MM:SS" that corresponds to the date and time the user would like to see.
 
 If the request does not specify a year, assume that the year is the current year.
@@ -50,12 +50,47 @@ Begin.
 
 """
 
-PROMPT += "\n".join([
+context = "\n".join([
     f"request: {d['request']}\ncurrent date: {d['current date']}\ncurrent time: {d['current time']}\nresponse: {d['label']}\n" 
     for d in training_data])
 
-PROMPT += """
+answer_format = """
 request: "{request}"
 current date: {date}
 current time: {time}
 response:"""
+
+BAD_PROMPT += context
+BAD_PROMPT += answer_format
+
+GOOD_PROMPT = """
+You are a calendar. Users will submit you a request in natural language. 
+You will return a date and time in the format "YYYY-MM-DD HH:MM:SS" that corresponds to the date and time the user would like to see.
+
+Here are examples of a submission:
+
+
+request: "noon Sunday",
+current date: 2023-02-23,
+current time: 15:54:30,
+response: 2023-02-26 12:00:00
+
+request: "noon Sunday",
+current date: 2023-03-16,
+current time: 15:54:30,
+response: 2023-03-19 12:00:00
+
+request: "noon last Sunday",
+current date: 2023-02-23,
+current time: 15:54:30,
+response: 2023-02-19 12:00:00
+
+"""
+
+
+GOOD_PROMPT += """
+
+Begin.
+"""
+
+GOOD_PROMPT += answer_format
