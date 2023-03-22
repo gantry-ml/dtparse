@@ -1,11 +1,16 @@
 from datetime import datetime, date
 from llms import make_model
-from callbacks import GantryCallback
-from prompts import PROMPT
+# from callbacks import GantryCallback
+from prompts import GOOD_PROMPT
 
-model = make_model(PROMPT, callbacks=[GantryCallback("dtparse", env="dev")])
+# default_model = make_model(GOOD_PROMPT, callbacks=[GantryCallback("dtparse", env="dev")])
 
-dtparse = lambda req: model(date=str(date.today()), time=datetime.now().strftime("%H:%M:%S"), request=req)
+def DTParse(model):
+    def dtparse(req):
+        return model(date=str(date.today()), time=datetime.now().strftime("%H:%M:%S"), request=req)
+    return dtparse
+
+# dtparse = DTParse(default_model)
 
 def main():
     # for req in ["tomorrow at 3pm", "next saturday", "the day after tomorrow", "monday morning", "the second sunday of next month"]:
